@@ -1,8 +1,8 @@
 # Agent Guide — small game
 
-**Conciseness is paramount.** Code and docs must be scannable, 
-containing only what's needed. If you're unsure whether something 
-belongs here, put it in "Maybe Keep" below so it can be reviewed 
+**Conciseness is paramount.** Code and docs must be scannable,
+containing only what's needed. If you're unsure whether something
+belongs here, put it in "Maybe Keep" below so it can be reviewed
 or deleted easily.
 
 ## Priorities:
@@ -22,10 +22,10 @@ or deleted easily.
 Each UI variant is an independent Gradle module with its own `installDist`:
 
 ```sh
-./gradlew :exploration-engine-ui-lanterna:installDist  # TUI mode (lanterna + jansi)
+./gradlew :trap-towers-ui-lanterna:installDist  # TUI mode (lanterna + jansi)
 ```
 
-Run: `./adapter-ui-text/build/install/exploration-engine-ui-text/bin/exploration-engine-ui-text <scenario-file>`
+Run: `./adapter-ui-text/build/install/trap-towers-ui-text/bin/trap-towers-ui-text <scenario-file>`
 
 JVM 21 required. No separate lint/typecheck — `compileKotlin` covers it.
 
@@ -33,17 +33,17 @@ JVM 21 required. No separate lint/typecheck — `compileKotlin` covers it.
 
 Multi-module Gradle (Kotlin 2.1.20, JUnit 5). Each UI variant has its own `Main.kt`.
 
-| Path | Contents |
-|---|---|
-| `core/model/` | Area, Device, Player, World, Trigger, Item data classes |
-| `core/state/` | Immutable GameState with win/lose check |
-| `core/command/` | Sealed Command (Look/Move/Activate/TakeItem/DropItem/EquipItem/UnequipItem/Inventory), processCommand |
-| `core/engine/` | GameEngineImpl, TriggerEngine |
-| `core/port/` | Interfaces: GameEngine, ScenarioRepository; types: InputEvent, ViewData |
-| `core/adapter/jsonloader/` | JsonScenarioRepository, JsonFileReader (scenario loading) |
-| `core/adapter/storage/` | InMemoryGameStateStore |
-| `core/scenario/` | `ScenarioFile.kt` (JSON entries), `ScenarioLoader.kt` (assembleGame) |
-| `adapter-ui-lanterna/src/main/kotlin/exploration/cli/Main.kt` | LanternaUiAdapter entry point |
+| Path                                                          | Contents |
+|---------------------------------------------------------------|---|
+| `core/model/`                                                 | Area, Device, Player, World, Trigger, Item data classes |
+| `core/state/`                                                 | Immutable GameState with win/lose check |
+| `core/command/`                                               | Sealed Command (Look/Move/Activate/TakeItem/DropItem/EquipItem/UnequipItem/Inventory), processCommand |
+| `core/engine/`                                                | GameEngineImpl, TriggerEngine |
+| `core/port/`                                                  | Interfaces: GameEngine, ScenarioRepository; types: InputEvent, ViewData |
+| `core/adapter/jsonloader/`                                    | JsonScenarioRepository, JsonFileReader (scenario loading) |
+| `core/adapter/storage/`                                       | InMemoryGameStateStore |
+| `core/scenario/`                                              | `ScenarioFile.kt` (JSON entries), `ScenarioLoader.kt` (assembleGame) |
+| `adapter-ui-lanterna/src/main/kotlin/trap-towers/cli/Main.kt` | LanternaUiAdapter entry point |
 
 App module (`app/`) contains shared utilities (InMemoryGameStateStore, JsonScenarioRepository moved to core) and test resources. Each adapter-ui-* module is independently buildable with its own `MainKt`.
 
